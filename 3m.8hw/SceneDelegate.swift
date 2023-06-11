@@ -13,10 +13,47 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: windowScene)
+        
+        let mainVC = MainViewController()
+        
+        let tabOneBarItem = UITabBarItem(title: "Home",
+                                         image: UIImage(systemName: "house"),
+                                         selectedImage: UIImage(systemName: "house"))
+        
+        mainVC.tabBarItem = tabOneBarItem
+        
+        let secondVC = SearchViewController()
+        
+        let tabTwoeBarItem = UITabBarItem(title: "Search",
+                                          image: UIImage(systemName: "magnifyingglass"),
+                                          selectedImage: UIImage(systemName: "magnifyingglass"))
+        
+        secondVC.tabBarItem = tabTwoeBarItem
+        
+        let navController2 = UINavigationController(rootViewController:  secondVC)
+        
+        let addVC = AddViewController()
+        
+        let tabThreeBarItem = UITabBarItem(title: "Add product",
+                                         image: UIImage(systemName: "person"),
+                                         selectedImage: UIImage(systemName: "person"))
+        
+        addVC.tabBarItem = tabThreeBarItem
+        
+        let tabbarController = UITabBarController()
+        tabbarController.viewControllers = [mainVC, navController2, addVC]
+        tabbarController.tabBar.backgroundColor = .white
+        
+        window.rootViewController = tabbarController
+        
+        
+        self.window = window
+        self.window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -49,4 +86,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
